@@ -6,13 +6,13 @@
 /*   By: pablogon <pablogon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:01:30 by pablogon          #+#    #+#             */
-/*   Updated: 2024/08/22 16:42:52 by pablogon         ###   ########.fr       */
+/*   Updated: 2024/08/23 02:19:53 by pablogon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int main(int argc, char **argv, char **env) 
+int	main(int argc, char **argv, char **env)
 {
 	int	fd[2];
 
