@@ -6,15 +6,13 @@
 #    By: pablogon <pablogon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 16:33:04 by pablogon          #+#    #+#              #
-#    Updated: 2024/08/22 23:31:59 by pablogon         ###   ########.fr        #
+#    Updated: 2024/08/23 13:42:49 by pablogon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= pipex
 
-CFLAGS:= -Wall -Werror -Wextra \
-	#-g -fsanitize=address,undefined \
-	#-Wunreachable-code -Ofast
+CFLAGS:= -g -Wall -Werror -Wextra \
 
 LIBFT_DIR = ./Libft
 

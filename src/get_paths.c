@@ -6,7 +6,7 @@
 /*   By: pablogon <pablogon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:49:06 by pablogon          #+#    #+#             */
-/*   Updated: 2024/08/23 02:15:10 by pablogon         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:02:57 by pablogon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,13 @@
 
 char	*ft_get_cmd_path(char *argv, char **path)
 {
-	int			i;
+	int		i;
 	char	**cmd;
 	char	*temp;
 	char	*cmd_and_path;
 
 	i = 0;
 	cmd = ft_split(argv, ' ');
-	if (!cmd || !cmd[0])
-	{
-		ft_free_split(cmd);
-		return (NULL);
-	}
 	while (path[i])
 	{
 		temp = ft_strjoin(path[i], "/");
@@ -38,13 +33,14 @@ char	*ft_get_cmd_path(char *argv, char **path)
 		free(cmd_and_path);
 		i++;
 	}
+	cmd_and_path = ft_strdup(cmd[0]);
 	ft_free_split(cmd);
-	return (NULL);
+	return (cmd_and_path);
 }
 
 char	**ft_get_path(char **env)
 {
-	int				i;
+	int		i;
 	char	*full_path;
 	char	**path_splitted;
 

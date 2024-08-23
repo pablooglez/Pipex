@@ -6,7 +6,7 @@
 /*   By: pablogon <pablogon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:46:44 by pablogon          #+#    #+#             */
-/*   Updated: 2024/08/23 02:18:58 by pablogon         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:55:31 by pablogon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,13 @@ void	ft_error_pipex(char *msg);
 char	*ft_get_cmd_path(char *argv, char **path);
 char	**ft_get_path(char **env);
 
-//--------------------MAIN FUCTION--------------//
-int main(int argc, char **argv, char **env);
-
 //--------------------PIPEX---------------------//
 void	process_first_child(char **argv, int *fd, char **env);
 void	process_second_child(char **argv, int *fd, char **env);
 void	execute_program(char **argv, int *fd, char **env);
 
 //--------------------UTILS--------------------//
+void	operate_dup2(int fd_old, int fd_new);
 void	ft_free_split(char **split);
 
 #endif

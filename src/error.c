@@ -6,7 +6,7 @@
 /*   By: pablogon <pablogon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:43:33 by pablogon          #+#    #+#             */
-/*   Updated: 2024/08/23 02:20:19 by pablogon         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:49:31 by pablogon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_error_pipex(char *msg)
 {
-	perror(msg);
+	write (2, msg, ft_strlen(msg));
+	write (2, "\n", 1);
 	exit(EXIT_FAILURE);
 }

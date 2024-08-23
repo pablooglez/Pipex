@@ -6,7 +6,7 @@
 /*   By: pablogon <pablogon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:12:18 by pablogon          #+#    #+#             */
-/*   Updated: 2024/08/23 13:37:08 by pablogon         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:55:43 by pablogon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,24 @@ void	process_first_child(char **argv, int *fd, char **env)
 	char	**path;
 	char	*cmd;
 
-	if (dup2(fd[1], STDOUT_FILENO) == -1)
-		ft_error_pipex("Dup2 Error");
-	close(fd[1]);
+	operate_dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
 	infile = open(argv[1], O_RDONLY);
 	if (infile == -1)
 		ft_error_pipex("Infile Error");
-	if (dup2(infile, STDIN_FILENO) == -1)
-		ft_error_pipex("Dup2 Error");
-	close(infile);
+	operate_dup2(infile, STDIN_FILENO);
 	path = ft_get_path(env);
 	if (!path)
 		ft_error_pipex("Error getting path");
 	cmd = ft_get_cmd_path(argv[2], path);
 	ft_free_split(path);
 	if (!cmd)
-		ft_error_pipex("zsh: Command not found");
+		ft_error_pipex("pipex: Command not found");
 	if (execve (cmd, ft_split(argv[2], ' '), env) == -1)
 	{
 		free(cmd);
 		ft_error_pipex("Execve Error");
 	}
-	free(cmd);
-	exit(1);
 }
 
 void	process_second_child(char **argv, int *fd, char **env)
@@ -50,30 +44,24 @@ void	process_second_child(char **argv, int *fd, char **env)
 	char	**path;
 	char	*cmd;
 
-	if (dup2(fd[0], STDIN_FILENO) == -1)
-		ft_error_pipex("Dup2 Error");
-	close(fd[0]);
+	operate_dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
 	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (outfile == -1)
 		ft_error_pipex("Outfile error");
-	if (dup2(outfile, STDOUT_FILENO) == -1)
-		ft_error_pipex("Dup2 Error");
-	close(outfile);
+	operate_dup2(outfile, STDOUT_FILENO);
 	path = ft_get_path(env);
 	if (!path)
 		ft_error_pipex("Error getting path");
 	cmd = ft_get_cmd_path(argv[3], path);
 	ft_free_split(path);
 	if (!cmd)
-		ft_error_pipex("zsh: Command not found");
+		ft_error_pipex("pipex: Command not found");
 	if (execve (cmd, ft_split(argv[3], ' '), env) == -1)
 	{
 		free(cmd);
 		ft_error_pipex("Execve Error");
 	}
-	free(cmd);
-	exit(1);
 }
 
 void	execute_program(char **argv, int *fd, char **env)
